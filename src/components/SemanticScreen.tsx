@@ -16,7 +16,7 @@
   You should have received a copy of the GNU General Public License
   along with U4U.  If not, see <https://www.gnu.org/licenses/>.
 */
-import React, { useMemo, useEffect } from "react";
+import React, { useMemo, useEffect, useLayoutEffect } from "react";
 import { Provider } from "react-redux";
 import { createStore } from "../reducers/store";
 import { MessageState } from "../reducers/message";
@@ -35,7 +35,7 @@ const SemanticScreen = (props: {
 
   const store = useMemo(createStore, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (message && message !== store.getState().message) {
       store.dispatch(setMessage({ message: message }));
     }

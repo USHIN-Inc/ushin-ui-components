@@ -2,6 +2,7 @@ import { Action, Actions } from "../actions/constants";
 import { AppState } from "./store";
 import update from "immutability-helper";
 import { v4 as uuidv4 } from "uuid";
+import randomColor from "randomcolor";
 
 import {
   allPointShapes,
@@ -34,7 +35,7 @@ export interface MessageState {
 
 export const initialMessageState: MessageState = {
   messageId: uuidv4(),
-  author: { name: "anonymous", color: "#7d3989" },
+  author: { name: "anonymous", color: randomColor() },
   points: {
     facts: [],
     thoughts: [],

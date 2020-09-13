@@ -19,15 +19,14 @@
 import styled from "styled-components";
 
 interface StyledRegionProps {
-  borderColor?: string;
+  borderColor: string;
   isExpanded: string | undefined;
 }
 
 const StyledRegion = styled.div<StyledRegionProps>`
   overflow-y: auto;
   overflow-x: hidden;
-  border: 2px solid
-    ${(props) => (props.borderColor ? props.borderColor : "lightgray")};
+  border: 2px solid ${(props) => props.borderColor};
   border-radius: 7px;
   margin: 0.5px;
 
@@ -37,7 +36,7 @@ const StyledRegion = styled.div<StyledRegionProps>`
   }
 
   @media (min-width: 800px) {
-    --minimized-border: 2px solid lightgray;
+    --minimized-border: 2px solid ${(props) => props.borderColor};
     --minimized-border-radius: 10px;
   }
 

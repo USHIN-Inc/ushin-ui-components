@@ -18,8 +18,7 @@
 */
 import React, { useState } from "react";
 import SemanticScreen from "./components/SemanticScreen";
-import { messages } from "./reducers/initialState";
-
+import { messages } from "./constants/initialState";
 import { MessageState } from "./reducers/message";
 
 const App = () => {

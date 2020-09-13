@@ -22,6 +22,7 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { wrapGrid } from "animate-css-grid";
 import { v4 as uuidv4 } from "uuid";
+import randomColor from "randomcolor";
 
 import Region from "./Region";
 import MeritsRegion from "./MeritsRegion";
@@ -61,9 +62,10 @@ const SemanticScreen = (props: {
     name: "anonymous",
     authorId: uuidv4(),
     authorDate: new Date(),
-    color: "#fff",
+    color: randomColor(),
   };
 
+  console.log(author.color);
   const createEmptyPoint = (shape: PointShape, index: number) => {
     props.pointCreate({
       point: {
