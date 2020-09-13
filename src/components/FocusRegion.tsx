@@ -41,6 +41,7 @@ const FocusRegion = (props: {
   onRegionClick: any;
   setFocus: (params: SetFocusParams) => void;
   setExpandedRegion: (params: string) => void;
+  darkMode: boolean;
 }) => {
   const {
     region,
@@ -86,6 +87,7 @@ const FocusRegion = (props: {
             isMainPoint={isMainPoint}
             isEditing={editingPointId === point.pointId}
             onClick={() => onRegionClick(region, true)}
+            darkMode={props.darkMode}
           />
         )}
       </StyledDiv>

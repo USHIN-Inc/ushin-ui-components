@@ -36,6 +36,7 @@ const FocusPoint = (props: {
   shape: PointShape;
   index: number;
   readOnly: boolean;
+  darkMode: boolean;
   isMainPoint: boolean;
   isEditing: boolean;
   onClick: any;
@@ -115,12 +116,14 @@ const FocusPoint = (props: {
         ref={ref}
         isMainPoint={isMainPoint}
         quotedAuthor={point.quotedAuthor}
+        darkMode={props.darkMode}
       />
       {point.quotedAuthor && (
         <Banner
           text={point.quotedAuthor.name}
           color={point.quotedAuthor.color}
           placement={{ top: "-0.5rem", right: "0.4rem" }}
+          darkMode={props.darkMode}
         />
       )}
     </StyledSpan>
@@ -132,6 +135,7 @@ interface StyledProps {
   isEditing?: boolean;
   isDragging?: boolean;
   quotedAuthor?: AuthorI;
+  darkMode?: boolean;
 }
 
 const StyledSpan = styled.span<StyledProps>`
@@ -142,7 +146,7 @@ const StyledSpan = styled.span<StyledProps>`
   ${(props) =>
     props.isEditing &&
     `
-  background-color: #efefef;
+  background-color: #777;
   border-radius: 5px;
 `}
 
@@ -162,6 +166,7 @@ const StyledImg = styled.img<StyledProps>`
 const StyledTextArea = styled(TextareaAutosize)<StyledProps>`
   width: 100%;
   border: 0px;
+  color: ${(props) => (props.darkMode ? "#fff" : "#000")};
   background-color: transparent;
   font-family: arial;
   font-size: medium;

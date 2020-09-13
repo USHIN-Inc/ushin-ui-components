@@ -67,6 +67,7 @@ const Point = (props: {
   pointUpdate: (params: PointUpdateParams) => void;
   setMainPoint: (params: SetMainPointParams) => void;
   setExpandedRegion: (region: string) => void;
+  darkMode: boolean;
 }) => {
   const {
     point,
@@ -237,6 +238,7 @@ const Point = (props: {
         readOnly={!!point.quotedAuthor || props.readOnly}
         isMainPoint={isMainPoint}
         quotedAuthor={point.quotedAuthor}
+        darkMode={props.darkMode}
         ref={ref}
         onKeyDown={(e: any) => {
           if (props.readOnly) {
@@ -305,6 +307,7 @@ const Point = (props: {
           text={point.quotedAuthor.name}
           color={point.quotedAuthor.color}
           placement={{ top: "-0.15rem", right: "0.8rem" }}
+          darkMode={props.darkMode}
         />
       )}
     </StyledSpan>
@@ -317,6 +320,7 @@ interface StyledProps {
   isDragging?: boolean;
   isFirst?: boolean;
   quotedAuthor?: AuthorI;
+  darkMode?: boolean;
 }
 
 const StyledSpan = styled.span<StyledProps>`
@@ -331,7 +335,7 @@ const StyledSpan = styled.span<StyledProps>`
   ${(props) =>
     props.isEditing &&
     `
-  background-color: #efefef;
+  background-color: #777;
   border-radius: 5px;
 `}
 `;
@@ -347,6 +351,7 @@ const StyledImg = styled.img<StyledProps>`
 const StyledTextArea = styled(TextareaAutosize)<StyledProps>`
   width: 100%;
   border: 0;
+  color: ${(props) => (props.darkMode ? "#fff" : "#000")};
   background-color: transparent;
   font-family: arial;
   font-size: ${(props) => (props.isMainPoint ? "medium" : "small")};

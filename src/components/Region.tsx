@@ -51,6 +51,7 @@ const Region = (props: {
   editingPointId: string;
   pointMove: (params: PointMoveParams) => void;
   setExpandedRegion: (region: string) => void;
+  darkMode: boolean;
 }) => {
   const {
     region,
@@ -141,6 +142,7 @@ const Region = (props: {
                 ? cursorPosition.index
                 : undefined
             }
+            darkMode={props.darkMode}
           />
         ))}
         {isExpanded === "expanded" && !props.readOnly && (

@@ -29,6 +29,7 @@ const SemanticScreen = (props: {
   onMessageChange?: (message: MessageState) => void;
   showShapes?: boolean;
   readOnly?: boolean;
+  darkMode?: boolean;
 }) => {
   const { message, onMessageChange } = props;
 
@@ -54,6 +55,7 @@ const SemanticScreen = (props: {
       <SemanticScreenLogic
         showShapes={props.showShapes || true}
         readOnly={props.readOnly || false}
+        darkMode={props.darkMode || false}
       />
     </Provider>
   );

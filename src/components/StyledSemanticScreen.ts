@@ -22,13 +22,14 @@ interface Props {
   expandedRegion: string;
   showShapes: boolean;
   ref: any;
+  darkMode: boolean;
 }
 
 const StyledSemanticScreen = styled.div<Props>`
   height: 100%;
   width: 100%;
   position: relative;
-  background-color: white;
+  background-color: ${(props) => (props.darkMode ? "#000" : "#fff")};
   padding: ${(props) => (props.showShapes ? "2rem" : "0")};
   box-sizing: border-box;
   display: grid;

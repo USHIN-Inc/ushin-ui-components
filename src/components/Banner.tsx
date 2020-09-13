@@ -28,6 +28,7 @@ const Banner = (props: {
   text: string;
   color: string;
   placement: Placement;
+  darkMode: boolean;
 }) => (
   // \u00A0 adds extra spaces on either side of the text
   <BannerView
@@ -35,13 +36,19 @@ const Banner = (props: {
     onClick={console.log}
     top={props.placement.top}
     right={props.placement.right}
+    darkMode={props.darkMode}
   >
     {`\u00A0 ${props.text} \u00A0`}
   </BannerView>
 );
 
-const BannerView = styled.div<Placement>`
+interface BannerViewProps extends Placement {
+  darkMode: boolean;
+}
+
+const BannerView = styled.div<BannerViewProps>`
   position: absolute;
+  color: ${(props) => (props.darkMode ? "#fff" : "#000")};
   text-align: center;
   font-size: medium;
   top: ${(props) => props.top};
@@ -49,7 +56,7 @@ const BannerView = styled.div<Placement>`
   padding: 0;
   z-index: 1;
   cursor: pointer;
-  background-color: #ffffff;
+  background-color: ${(props) => (props.darkMode ? "#000" : "#fff")};
 
   &:before {
     content: "";

@@ -48,6 +48,7 @@ const SemanticScreen = (props: {
   message: MessageState;
   showShapes: boolean;
   readOnly: boolean;
+  darkMode: boolean;
   expandedRegion: string;
   setEditingPoint: (pointId: string) => void;
   pointCreate: (params: PointCreateParams) => void;
@@ -62,7 +63,6 @@ const SemanticScreen = (props: {
     authorDate: new Date(),
     color: "#fff",
   };
-  //TODO: what if App doesn't pass any points to SemanticScreen?
 
   const createEmptyPoint = (shape: PointShape, index: number) => {
     props.pointCreate({
@@ -130,6 +130,7 @@ const SemanticScreen = (props: {
         expandedRegion={expandedRegion}
         showShapes={showShapes}
         ref={semanticScreenRef}
+        darkMode={props.darkMode}
       >
         <Banner
           text={author.name}
@@ -139,6 +140,7 @@ const SemanticScreen = (props: {
               ? { top: "1.2rem", right: "2.5rem" }
               : { top: "0", right: "0" }
           }
+          darkMode={props.darkMode}
         />
         {regions.map((region: RegionI) => {
           if (region === "merits") {
@@ -183,6 +185,7 @@ const SemanticScreen = (props: {
                 }
                 onRegionClick={handleRegionClick}
                 key={region}
+                darkMode={props.darkMode}
               />
             );
           } else {
@@ -198,6 +201,7 @@ const SemanticScreen = (props: {
                 createEmptyPoint={createEmptyPoint}
                 onRegionClick={handleRegionClick}
                 key={region}
+                darkMode={props.darkMode}
               />
             );
           }

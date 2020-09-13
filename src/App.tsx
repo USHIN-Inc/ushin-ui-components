@@ -25,6 +25,7 @@ import { MessageState } from "./reducers/message";
 const App = () => {
   const showShapes = true;
   const readOnly = false;
+  const darkMode = true;
 
   const [message, setMessage] = useState<MessageState>(messages[0]);
   const onMessageChange = (message: MessageState) => {
@@ -37,6 +38,7 @@ const App = () => {
       showShapes={showShapes}
       readOnly={readOnly}
       onMessageChange={onMessageChange}
+      darkMode={darkMode}
     />
   );
 };
