@@ -32,7 +32,7 @@
     "redux-thunk": "^2.3.0",
     "styled-components": "^5.1.1",
     "typescript": "~3.7.2",
-    "ushin-db": "USHIN-Inc/ushin-db#master",
+    "ushin-db": "github:USHIN-Inc/ushin-db#dedupePoints",
     "uuid": "^8.3.0"
   },
   "scripts": {

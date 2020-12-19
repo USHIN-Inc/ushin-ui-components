@@ -1,13 +1,13 @@
 import { Action, Actions } from "../actions/constants";
 
-import { MessageI } from "../dataModels/dataModels";
 import { _SearchByContentParams } from "../actions/searchActions";
 
 import { AppState } from "./store";
 
 export interface SearchState {
   searchQuery: string;
-  results: MessageI[];
+  // Array of message IDs
+  results: string[];
 }
 
 export const initialSearchState: SearchState = {

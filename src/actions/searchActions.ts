@@ -2,14 +2,13 @@ import { Action, Actions } from "./constants";
 import { ThunkAction } from "redux-thunk";
 
 import { AppState } from "../reducers/store";
-import { MessageI } from "../dataModels/dataModels";
 
 export interface SearchByContentParams {
   searchQuery: string;
 }
 
 export interface _SearchByContentParams extends SearchByContentParams {
-  results: MessageI[];
+  results: string[];
 }
 
 export const searchByContent = (
@@ -22,7 +21,11 @@ export const searchByContent = (
       return console.warn("Tried to search before database was loaded");
     const db = state.db.db;
     db.searchPointsByContent(params.searchQuery).then(async (points) => {
-      const results = await db.searchMessagesForPoints(points);
+      const messages = await db.searchMessagesForPoints(points);
+      const results = messages.map(({ _id }) => _id);
+
+      // TODO: Put messages into message store
+      // TODO: Put points into point store
 
       dispatch(
         _searchByContent({
