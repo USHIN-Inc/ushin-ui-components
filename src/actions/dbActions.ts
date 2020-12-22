@@ -167,3 +167,35 @@ export const saveMessage = (
     })();
   };
 };
+
+export interface GetMessageParams {
+  messageId: string;
+}
+
+export const getMessage = (
+  params: GetMessageParams
+): ThunkAction<void, AppState, unknown, Action<SaveMessageParams>> => {
+  return (dispatch, getState) => {
+    (async () => {
+      const state = getState();
+
+      if (!state.db.db)
+        return console.warn("Tried to get message before database was loaded");
+      const db = state.db.db;
+
+      try {
+        const message = await db.getMessage(params.messageId);
+        const points = await db.getPointsForMessage(message);
+        dispatch({
+          type: Actions.saveMessage,
+          params: {
+            message,
+            points,
+          },
+        });
+      } catch (e) {
+        console.log(e);
+      }
+    })();
+  };
+};
