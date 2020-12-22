@@ -98,6 +98,12 @@ export const loadDatabase = (): ThunkAction<
         //Get currentMessage from ushin-db if it's a published message
         //(if it's a draft, the redux store already got it from localStorage)
         if (!state.draftMessages.allIds.includes(currentMessageId)) {
+          //  The following doesn't work (as a replacement for the
+          //  next three uncommented lines:
+          //  dispatch(getMessage({ messageId: currentMessageId }));
+          //  the displayApp is getting called before the getMessage logic
+          //  completes (because it's async). Is it possible for us to `await`
+          //  the redux dispatch?
           const message = await db.getMessage(currentMessageId);
           const points = await db.getPointsForMessage(message);
           dispatch({ type: Actions.saveMessage, params: { message, points } });
