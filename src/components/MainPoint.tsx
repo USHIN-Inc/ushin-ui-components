@@ -15,7 +15,7 @@
   You should have received a copy of the GNU Affero General Public License
   along with U4U.  If not, see <https://www.gnu.org/licenses/>.
 */
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { PointI, PointReferenceI } from "../dataModels/dataModels";
 import {
   getPointIfReference,
@@ -24,7 +24,10 @@ import {
 import { useDragPoint } from "../hooks/useDragPoint";
 import Point from "./Point";
 import { PointWrapper } from "./StyledPoint";
-import PointHoverOptions from "./PointHoverOptions";
+import HoverOptions from "./HoverOptions";
+import { Hamburger } from "./Hamburger";
+
+import { useHoverOptions } from "../hooks/useHoverOptions";
 
 import { connect } from "react-redux";
 import { AppState } from "../reducers";
@@ -106,20 +109,27 @@ const MainPoint = (props: AllProps) => {
   drag(pointRef.current?.button);
   preview(pointRef.current?.div);
 
-  const [isHovered, setIsHovered] = useState(false);
-
-  const renderPointHoverOptions =
-    isHovered && (props.isDraft || props.referenceData);
+  const {
+    renderHamburger,
+    renderHoverOptions,
+    handleHamburgerMouseEnter,
+    handlePointMouseEnter,
+    handlePointMouseLeave,
+  } = useHoverOptions();
 
   return (
-    <PointWrapper isSelected={props.isSelected} darkMode={props.darkMode}>
+    <PointWrapper
+      onMouseEnter={handlePointMouseEnter}
+      onMouseLeave={handlePointMouseLeave}
+      isSelected={props.isSelected}
+      darkMode={props.darkMode}
+    >
       <Point
         id={props.pointId}
         displayPoint={props.point}
         referenceData={props.referenceData}
         isMainPoint={true}
         isSelected={props.isSelected}
-        setIsHovered={setIsHovered}
         readOnlyOverride={!props.isDraft}
         darkMode={props.darkMode}
         handleChange={handleChange}
@@ -129,8 +139,14 @@ const MainPoint = (props: AllProps) => {
         handleShapeIconClick={handleShapeIconClick}
         ref={pointRef}
       >
-        {renderPointHoverOptions && (
-          <PointHoverOptions
+        {renderHamburger && (
+          <Hamburger
+            onMouseEnter={handleHamburgerMouseEnter}
+            darkMode={props.darkMode}
+          />
+        )}
+        {renderHoverOptions && (
+          <HoverOptions
             type={props.isDraft ? "draftPoint" : "publishedPoint"}
             id={props.pointId}
             darkMode={props.darkMode}

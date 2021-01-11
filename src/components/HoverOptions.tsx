@@ -26,10 +26,7 @@ import {
   getOriginalMessageId,
   getOriginalPointId,
 } from "../dataModels/pointUtils";
-import {
-  PointHoverOptionsType,
-  PointReferenceI,
-} from "../dataModels/dataModels";
+import { HoverOptionsType, PointReferenceI } from "../dataModels/dataModels";
 
 import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "../reducers";
@@ -41,13 +38,13 @@ import { draftMessageDelete, setMain } from "../actions/draftMessagesActions";
 import { viewOriginalMessage } from "../actions/semanticScreenActions";
 
 interface Props {
-  type: PointHoverOptionsType;
+  type: HoverOptionsType;
   id: string;
   darkMode?: boolean;
   isSelected?: boolean;
 }
 
-const PointHoverOptions = (props: Props) => {
+const HoverOptions = (props: Props) => {
   const dispatch = useDispatch();
 
   let trashDispatch: any;
@@ -190,12 +187,9 @@ const PointHoverOptions = (props: Props) => {
   };
 
   return (
-    <StyledPointHoverOptions
-      isSelected={props.isSelected}
-      darkMode={props.darkMode}
-    >
+    <StyledHoverOptions isSelected={props.isSelected} darkMode={props.darkMode}>
       <HoverButtons />
-    </StyledPointHoverOptions>
+    </StyledHoverOptions>
   );
 };
 
@@ -204,7 +198,7 @@ interface StyledProps {
   isSelected?: boolean;
 }
 
-const StyledPointHoverOptions = styled.div<StyledProps>`
+const StyledHoverOptions = styled.div<StyledProps>`
   --colorFG: ${(props) => blackOrWhite(props.darkMode, props.isSelected)[0]};
   --colorBG: ${(props) => blackOrWhite(props.darkMode, props.isSelected)[1]};
 
@@ -214,7 +208,7 @@ const StyledPointHoverOptions = styled.div<StyledProps>`
   margin: auto;
   top: 0;
   bottom: 0;
-  right: 12px;
+  right: -0.5rem;
   height: 1rem;
   z-index: 10;
   background-color: var(--colorBG);
@@ -279,4 +273,4 @@ const RedButtonSvg = styled.svg<StyledProps>`
   }
 `;
 
-export default PointHoverOptions;
+export default HoverOptions;

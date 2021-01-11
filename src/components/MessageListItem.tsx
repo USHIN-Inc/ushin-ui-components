@@ -22,7 +22,7 @@ import styled from "styled-components";
 import {
   AuthorI,
   PointI,
-  PointHoverOptionsType,
+  HoverOptionsType,
   PointReferenceI,
 } from "../dataModels/dataModels";
 import {
@@ -32,8 +32,11 @@ import {
   isUserIdentity,
 } from "../dataModels/pointUtils";
 import Point from "./Point";
-import PointHoverOptions from "./PointHoverOptions";
+import HoverOptions from "./HoverOptions";
 import Banner from "./Banner";
+import { Hamburger } from "./Hamburger";
+
+import { useHoverOptions } from "../hooks/useHoverOptions";
 
 import { connect } from "react-redux";
 import { AppState } from "../reducers";
@@ -52,7 +55,7 @@ import { ItemTypes } from "../constants/React-Dnd";
 
 interface OwnProps {
   messageId: string;
-  type: PointHoverOptionsType;
+  type: HoverOptionsType;
   index: number;
   darkMode?: boolean;
 }
@@ -98,17 +101,20 @@ const MessageListItem = (props: AllProps) => {
     setCounter((c) => c + 1);
   }, [referenceData]);
 
-  const [isHovered, setIsHovered] = useState(false);
+  const {
+    isHovered,
+    renderHamburger,
+    renderHoverOptions,
+    handleHamburgerMouseEnter,
+    handlePointMouseEnter,
+    handlePointMouseLeave,
+  } = useHoverOptions();
 
   return (
     <MessageWrapper
       author={props.author}
-      onMouseEnter={() => {
-        setIsHovered(true);
-      }}
-      onMouseLeave={() => {
-        setIsHovered(false);
-      }}
+      onMouseEnter={handlePointMouseEnter}
+      onMouseLeave={handlePointMouseLeave}
       onClick={handleClick}
       isHovered={isHovered || props.isDragHovered}
       darkMode={props.darkMode}
@@ -124,8 +130,14 @@ const MessageListItem = (props: AllProps) => {
         darkMode={props.darkMode}
         suppressAutoFocus={true}
       >
-        {isHovered && props.type !== "publishedMessage" && (
-          <PointHoverOptions
+        {renderHamburger && props.type !== "publishedMessage" && (
+          <Hamburger
+            onMouseEnter={handleHamburgerMouseEnter}
+            darkMode={props.darkMode}
+          />
+        )}
+        {renderHoverOptions && props.type !== "publishedMessage" && (
+          <HoverOptions
             type={props.type}
             id={props.messageId}
             darkMode={props.darkMode}
@@ -150,7 +162,7 @@ const MessageWrapper = styled.div<{
 }>`
   position: relative;
   border-radius: 3px;
-  padding: 3px 0 3px 3px;
+  padding: 3px 1rem 3px 3px;
 
   ${(props) =>
     `

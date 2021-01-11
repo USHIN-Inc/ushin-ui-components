@@ -109,7 +109,7 @@ export interface CursorPositionI {
   index: number;
 }
 
-export type PointHoverOptionsType =
+export type HoverOptionsType =
   | "draftPoint"
   | "publishedPoint"
   | "draftMessage"

@@ -46,6 +46,7 @@ export const PointWrapper = styled.div<StyledPointProps>`
   }
 
   margin: 2px 2px;
+  padding-right: 1rem;
   background-color: var(--colorBG);
   border-radius: 3px;
 `;

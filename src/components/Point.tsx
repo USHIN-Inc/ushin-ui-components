@@ -37,7 +37,6 @@ interface Props {
   referenceData: PointReferenceI | null;
   isMainPoint: boolean;
   isSelected: boolean;
-  setIsHovered?: (isHovered: boolean) => void;
   readOnlyOverride: boolean;
   suppressAutoFocus?: boolean;
   darkMode?: boolean;
@@ -79,12 +78,6 @@ const Point = forwardRef<any, Props>((props, ref) => {
   return (
     <StyledDiv
       onClick={props.handlePointDivClick}
-      onMouseEnter={() => {
-        props.setIsHovered && props.setIsHovered(true);
-      }}
-      onMouseLeave={() => {
-        props.setIsHovered && props.setIsHovered(false);
-      }}
       ref={divRef}
       isSelected={props.isSelected}
       darkMode={props.darkMode}
