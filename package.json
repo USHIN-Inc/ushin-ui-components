@@ -18,7 +18,7 @@
     "@types/styled-components": "^5.1.2",
     "@types/uuid": "^8.3.0",
     "animate-css-grid": "^1.4.3",
-    "immer": ">=8.0.1",
+    "immer": ">=9.0.6",
     "level-js": "^5.0.2",
     "pouchdb-adapter-leveldb-browser": "^7.0.0-prerelease",
     "pouchdb-adapter-leveldb-core": "^7.2.2",
