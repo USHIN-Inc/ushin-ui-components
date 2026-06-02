@@ -38,7 +38,7 @@
     "styled-components": "^5.1.1",
     "typescript": "~3.7.2",
     "ushin-db": "USHIN-Inc/ushin-db#master",
-    "uuid": "^8.3.0"
+    "uuid": "^14.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
